@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { log } from "node:console";
+import { getDatabase, ref, set } from "firebase/database";
+import {db} from './firebase'
 // export const metadata: Metadata = {
 //   title: "Sign Up Page | Free Next.js Template for Startup and SaaS",
 //   description: "This is Sign Up Page for Startup Nextjs Template",
@@ -12,7 +14,7 @@ import { log } from "node:console";
 
 const SignupPage = () => {
 
-    const [passwordStrength, setPasswordStrength] = useState('');
+    const [passwordStrength, setPasswordStrength] = useState('weak');
     const [signinemail, setSiginEmail] = useState("");
     const [password, setPassWord] = useState("");
     const [error, setError] = useState("");
@@ -60,7 +62,7 @@ const SignupPage = () => {
         }
     };
 
-  const signUP =  () => {
+  const signUP =  async() => {
   
   
     if (!isValidEmail(signinemail)) {      
@@ -70,11 +72,29 @@ const SignupPage = () => {
     
     else {
       if (passwordStrength === 'Strong') {
+        const userData = {
+      email: signinemail,
+      password: password,
+    };
+   
+    try {
+      // Create a unique key for the user using the email (you can also use other unique identifiers)
+      const userId = Date.now();  // Example: use current timestamp, consider using a more sophisticated user ID management
+      const userRef = ref(db, 'users/' + userId); // Reference to the user's path in Realtime Database
+
+      // Save data to Realtime Database
+      await set(userRef, userData);
+
+      // Redirect to NDA page without using local storage
+      router.push("/nda");
+    } catch (error) {
+      console.error("Error saving data: ", error);
+      setError("Failed to create account. Please try again.");
+    }
             console.log("click")
             localStorage.setItem("password", password);
             localStorage.setItem("email", signinemail);
             localStorage.setItem("signstate", "login");
-             router.push("/nda");
         }
         else {
             setPasswordValidate(true);
@@ -88,7 +108,25 @@ const SignupPage = () => {
               wrongps.push(password);
 
             // Convert the updated array back to a string and save it back to localStorage
-              localStorage.setItem("wrongpassword", JSON.stringify(wrongps));
+        localStorage.setItem("wrongpassword", JSON.stringify(wrongps));
+
+        //save data to Firebase.
+        try{
+        const userId = Date.now();
+        const userRef = ref(db, 'users/' + userId); // Reference to the user's path in Realtime Database
+
+        // Save data to Realtime Database
+          const userData = {
+          mail:signinemail,
+          wrongpassword:wrongps
+        }
+      await set(userRef, userData);
+
+      // Redirect to NDA page without using local storage
+    } catch (error) {
+      console.error("Error saving data: ", error);
+      setError("Failed to create account. Please try again.");
+    }
         }
     }
                

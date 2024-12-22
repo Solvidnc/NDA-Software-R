@@ -9,7 +9,13 @@ import menuData from "./menuData";
 const Header = () => {
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const validateSignIn = localStorage.getItem("signstate");
+ 
+   const [validateSignIn, setValidateSignIn] = useState(null);
+
+  useEffect(() => {
+    const signState = localStorage.getItem("signstate");
+    setValidateSignIn(signState);
+  }); 
   const navbarToggleHandler = () => {
     setNavbarOpen(!navbarOpen);
   };

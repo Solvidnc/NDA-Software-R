@@ -30,8 +30,8 @@ const SigninPage = () => {
       setError("You are not currently logged in. Please sign up to continue.");
       return;
     }
+     localStorage.setItem("signstate", "login");
     router.push("/nda");
-    localStorage.setItem("signstate", "login");
   }
 
   return (

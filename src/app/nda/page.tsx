@@ -44,7 +44,7 @@ const ErrorPage = () => {
     const [purpose, setPurpose] = useState("");
     const [signdate, setSigndate] = useState("");
     const [signatureData, setSignatureData] = useState("");
-    const [postalcode, setPostalcode] = useState(0);
+    const [postalcode, setPostalcode] = useState("");
     const [mndaterm, setMndaterm] = useState(0);
     const [country, setCountry] = useState("");
     const [streeaddress, setStreetAddress] = useState("");
