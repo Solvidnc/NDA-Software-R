@@ -2,14 +2,14 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBNBJl6KcjDuzG1Z0J6nJXvkrzh5LFN_2c",
-  authDomain: "ndawebsite-2b91d.firebaseapp.com",
-  projectId: "ndawebsite-2b91d",
-  storageBucket: "ndawebsite-2b91d.firebasestorage.app",
-  messagingSenderId: "615515239063",
-  appId: "1:615515239063:web:52c977e88d6cbc57b82fd2",
-  measurementId: "G-69C3YNMFK9",
-  databaseURL: "https://ndawebsite-2b91d-default-rtdb.firebaseio.com/",
+  apiKey: "AIzaSyAuCzBd1gNMGGQpE_XtDHt2aG_rh485ZG8",
+  authDomain: "ndawebsite-a36be.firebaseapp.com",
+  databaseURL: "https://ndawebsite-a36be-default-rtdb.firebaseio.com",
+  projectId: "ndawebsite-a36be",
+  storageBucket: "ndawebsite-a36be.firebasestorage.app",
+  messagingSenderId: "465375483037",
+  appId: "1:465375483037:web:c39fc8659e05fdb258b074",
+  measurementId: "G-2B98VBVMVQ"
 };
 
 // Initialize Firebase
